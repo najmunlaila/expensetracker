@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ExpenseCategory>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2>Expnese Categories</h2>
+        <div class="d-flex justify-content-end mb-1">
+            <a asp-controller="Categories" asp-action="Create" class="btn btn-primary btn-sm">Add New</a>
+        </div>
+    </div>
+    <div class="col-12">
+        <table class="table table-bordered table-striped">
+            <thead class="table-light bg-light">
+                <tr>
+                    <th>Category Name</th>
+                    <th>
+                        
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var data in Model)
+                {
+                    <tr>
+                        <td>@data.CategoryName</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" asp-controller="Categories" asp-action="Edit" asp-route-id="@data.ExpenseCategoryId">Edit</a>
+                            <a class="btn btn-danger btn-sm" asp-controller="Categories" asp-action="Delete" asp-route-id="@data.ExpenseCategoryId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

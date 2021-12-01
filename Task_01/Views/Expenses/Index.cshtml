@@ -1,0 +1,73 @@
+﻿@model IEnumerable<DailyExpense>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2>Expneses</h2>
+        <div class="d-flex justify-content-end mb-1">
+            <a asp-controller="Expenses" asp-action="Create" class="btn btn-primary btn-sm">Add New</a>
+        </div>
+        <form asp-controller="Expenses" asp-action="index">
+            <div class="d-flex justify-content-end mb-1">
+                <label class="px-2">Form</label>
+                <input style="width:300px" name="from" id="from" class="form-control form-control-sm mr-1" />
+                <label class="px-2">To</label>
+                <input style="width:300px" name="to" id="to" class="form-control form-control-sm mr-1" />
+                <button type="submit" class="btn btn-secondary btn-sm">Show</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-12">
+        <table class="table table-bordered table-striped">
+            <thead class="table-light bg-light">
+                <tr>
+                    <th>Date</th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var data in Model)
+                {
+                    <tr>
+                        <td>@data.ExpenseDate.ToString("yyyy-MM-dd")</td>
+                        <td>@data.ExpenseCategory.CategoryName</td>
+                        <td>@data.Amount.ToString("0.00")</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" asp-controller="Expenses" asp-action="Edit" asp-route-id="@data.ExpenseCategoryId">Edit</a>
+                            <a class="btn btn-danger btn-sm" asp-controller="Expenses" asp-action="Delete" asp-route-id="@data.ExpenseCategoryId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section styles {
+    <link href="~/libs/datepicker/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet" />
+}
+@section scripts {
+    <script src="~/libs/jquery/jquery.min.js"></script>
+    <script src="~/libs/validation/jquery.validate.min.js"></script>
+    <script src="~/libs/validation/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/libs/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script>
+    $(() => {
+        $("#from").datepicker({
+            format: 'yyyy-mm-dd'
+        });
+        $("#to").datepicker({
+            format: 'yyyy-mm-dd'
+        });
+    })
+    </script>
+}
+

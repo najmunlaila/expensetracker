@@ -1,0 +1,49 @@
+﻿@model DailyExpense
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2>Confirm delete!</h2>
+    </div>
+</div>
+
+<div class="row my-1">
+    <label class="col-2">Date</label>
+    <div class="col-10">
+        @Model.ExpenseDate.ToString("yyyy-MM-dd")
+
+    </div>
+</div>
+<div class="row my-1">
+    <label class="col-2">Category</label>
+    <div class="col-10">
+        @Model.ExpenseCategory.CategoryName
+
+    </div>
+</div>
+<div class="row my-1">
+    <label class="col-2">Amount</label>
+    <div class="col-10">
+        @Model.Amount
+
+    </div>
+</div>
+<form asp-action="Delete" asp-controller="Expenses" method="post">
+    <input type="hidden" asp-for="DailyExpenseId" />
+    <div class="row my-1">
+
+        <div class="col-12 text-end">
+            <button type="submit" class="btn btn-danger">Confirm Delete</button>
+        </div>
+    </div>
+</form>
+<a asp-action="Index" class="btn-link">Back to list</a>
+
+@section scripts {
+    <script src="~/libs/jquery/jquery.min.js"></script>
+    <script src="~/libs/validation/jquery.validate.min.js"></script>
+    <script src="~/libs/validation/jquery.validate.unobtrusive.min.js"></script>
+}
+
